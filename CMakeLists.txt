@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.25)
 
 include(FetchContent)
 
-project(imgui-glfw-glad-glm VERSION 4.1.0)
+project(imgui-glfw-glad-glm-imguizmo VERSION 4.1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(IGG_COMPONENTS "IMGUI;GLFW;GLAD;GLM" CACHE STRING "The components to import and build")
+set(IGG_COMPONENTS "IMGUI;IMGUIZMO;GLFW;GLAD;GLM" CACHE STRING "The components to import and build")
 
 foreach (comp IN ITEMS ${IGG_COMPONENTS})
     set(IMPORT_${comp} ON)
@@ -176,4 +176,22 @@ if (IMPORT_IMGUI)
             ${imgui_SOURCE_DIR}
             ${imgui_SOURCE_DIR}/backends
     )
+
+  ##############################
+  #          imguizmo          #
+  ##############################
+  if (IMPORT_IMGUIZMO)
+      add_library(
+          imguizmo
+          ${imguizmo_SOURCE_DIR}/ImGuizmo.cpp
+          ${imguizmo_SOURCE_DIR}/ImGuizmo.h
+      )
+      target_link_libraries(imguizmo PUBLIC imgui)
+      target_include_directories(
+              imguizmo
+              PUBLIC
+              ${imguizmo_SOURCE_DIR}
+      )
+  endif ()
 endif ()
+
