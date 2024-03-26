@@ -42,6 +42,12 @@ if (IMPORT_IMGUI)
 else ()
     unset(IGG_IMGUI_TAG CACHE)
 endif ()
+if (IMPORT_IMGUIZMO)
+    set(IGG_IMGUIZMO_TAG master CACHE STRING "Defines the imguizmo version (e.g. master, v1.89.4, v1.89.3, ...")
+    set(IMPORT_GLFW ON)
+else ()
+    unset(IGG_IMGUIZMO_TAG CACHE)
+endif ()
 if (IMPORT_GLFW)
     set(IGG_GLFW_TAG master CACHE STRING "Defines the glfw version (e.g. master, 3.3.8, 3.3.7, ...) ")
 else ()
@@ -148,6 +154,15 @@ if (IMPORT_IMGUI)
     list(APPEND components imgui)
 endif ()
 
+if (IMPORT_IMGUIZMO)
+    FetchContent_Declare(
+            imguizmo
+            GIT_REPOSITORY https://github.com/CedricGuillemet/ImGuizmo.git
+            GIT_TAG ${IGG_IMGUIZMO_TAG}
+    )
+    list(APPEND components imguizmo)
+endif ()
+
 if (components)
     FetchContent_MakeAvailable(${components})
 endif ()
@@ -180,7 +195,7 @@ if (IMPORT_IMGUI)
   ##############################
   #          imguizmo          #
   ##############################
-  #if (IMPORT_IMGUIZMO)
+  if (IMPORT_IMGUIZMO)
       add_library(
           imguizmo
           ${imguizmo_SOURCE_DIR}/ImGuizmo.cpp
@@ -192,6 +207,6 @@ if (IMPORT_IMGUI)
               PUBLIC
               ${imguizmo_SOURCE_DIR}
       )
-  #endif ()
+  endif ()
 endif ()
 
