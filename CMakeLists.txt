@@ -180,7 +180,7 @@ if (IMPORT_IMGUI)
   ##############################
   #          imguizmo          #
   ##############################
-  if (IMPORT_IMGUIZMO)
+  #if (IMPORT_IMGUIZMO)
       add_library(
           imguizmo
           ${imguizmo_SOURCE_DIR}/ImGuizmo.cpp
@@ -192,6 +192,6 @@ if (IMPORT_IMGUI)
               PUBLIC
               ${imguizmo_SOURCE_DIR}
       )
-  endif ()
+  #endif ()
 endif ()
 
