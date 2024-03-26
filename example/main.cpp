@@ -7,8 +7,12 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include <ImGuizmo.h>
 #include <iostream>
 #include <thread>
+
+int gizmoCount = 1;
+static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
 
 const char *vertexShaderSrc = R"(
 #version 450
@@ -210,6 +214,9 @@ int main(int argc, char *argv[]) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    ImGuizmo::SetOrthographic(true);
+    ImGuizmo::BeginFrame();
 
     static bool showDemo = false;
     ImGui::Begin("Example");
