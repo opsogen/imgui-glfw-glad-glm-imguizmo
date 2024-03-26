@@ -15,6 +15,7 @@ endforeach ()
 if (IMPORT_IMGUI)
     set(IMPORT_GLAD ON)
     set(IMPORT_GLFW ON)
+    set(IMPORT_IMGUIZMO ON)
 endif ()
 
 if (IMPORT_GLAD)
